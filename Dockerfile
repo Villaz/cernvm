@@ -28,6 +28,12 @@ RUN rpm --import http://emisoft.web.cern.ch/emisoft/dist/EMI/3/RPM-GPG-KEY-emi
 RUN yum --nogpgcheck -y install yum-priorities yum-protectbase
 RUN wget http://repository.egi.eu/sw/production/cas/1/current/repo-files/egi-trustanchors.repo -O /etc/yum.repos.d/egi-trustanchors.repo
 
+RUN wget https://bootstrap.pypa.io/get-pip.py
+RUN python get-pip.py
+RUN pip install requests
+
+RUN yum install voms-clients3
+
 VOLUME /cvmfs/
 VOLUME /scratch/
 VOLUME /usr/script/
