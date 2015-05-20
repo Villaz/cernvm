@@ -32,7 +32,13 @@ RUN wget https://bootstrap.pypa.io/get-pip.py
 RUN python get-pip.py
 RUN pip install requests
 
-RUN yum install voms-clients3
+RUN rpm --import http://emisoft.web.cern.ch/emisoft/dist/EMI/3/RPM-GPG-KEY-emi
+RUN wget http://emisoft.web.cern.ch/emisoft/dist/EMI/3/sl6/x86_64/base/emi-release-3.0.0-2.el6.noarch.rpm
+RUN yum localinstall -y emi-release-3.0.0-2.el6.noarch.rpm
+RUN yum -y update --nogpgcheck
+RUN yum -y install ftp://ftp.pbone.net/mirror/ftp5.gwdg.de/pub/opensuse/repositories/home:/mateli:/EPEL-deps/CentOS_CentOS-6/noarch/bouncycastle-1.46-5.3.noarch.rpm
+RUN yum -y install voms-clients3 --nogpgcheck
+
 
 VOLUME /cvmfs/
 VOLUME /scratch/
